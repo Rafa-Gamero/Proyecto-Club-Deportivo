@@ -8,8 +8,8 @@ import java.util.List;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+
+
 @Entity
 public class Discipline {
 
@@ -20,6 +20,13 @@ public class Discipline {
     private String name;
     private String schedule;
 
+    public Discipline() {
+    }
+
+    public Discipline(String name, String schedule) {
+        this.name = name;
+        this.schedule = schedule;
+    }
     @ManyToOne
     @JoinColumn(name = "trainer_id")
     private Trainer trainer;
