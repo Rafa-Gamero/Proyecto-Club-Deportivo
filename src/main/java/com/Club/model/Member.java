@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -26,6 +28,9 @@ public abstract class Member {
     private LocalDate endDate;
 
     private BigDecimal price;
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MemberDiscipline> memberDisciplines = new ArrayList<>();
+
 
     public int getAge() {
         return startDate != null ? LocalDate.now().getYear() - startDate.getYear() : 0;

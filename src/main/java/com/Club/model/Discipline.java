@@ -3,6 +3,7 @@ package com.Club.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -30,4 +31,7 @@ public class Discipline {
             inverseJoinColumns = @JoinColumn(name = "member_id")
     )
     private List<Member> members;
+    @OneToMany(mappedBy = "discipline", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MemberDiscipline> memberDisciplines = new ArrayList<>();
+
 }
