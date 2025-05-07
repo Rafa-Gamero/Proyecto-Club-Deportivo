@@ -3,13 +3,14 @@ package com.Club.security;
 import com.Club.model.AppUser;
 import com.Club.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-
+@Primary
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
