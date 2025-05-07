@@ -1,53 +1,36 @@
 package com.Club.controller;
 
-import com.Club.model.Discipline;
-import com.Club.model.Member;
 import com.Club.model.MemberDiscipline;
 import com.Club.service.MemberDisciplineService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import lombok.*;
-import jakarta.persistence.*;
 
 import java.util.List;
-@Entity
-@Table(name = "member_discipline")
-@Getter
-@Setter
-@NoArgsConstructor(force = true)
-@AllArgsConstructor
+
 @RestController
 @RequestMapping("/api/member-disciplines")
 @RequiredArgsConstructor
 public class MemberDisciplineController {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "member_id", nullable = false)
-    private Member member;
-
-    @ManyToOne
-    @JoinColumn(name = "discipline_id", nullable = false)
-    private Discipline discipline;
-
-    private final MemberDisciplineService service;
+    private final MemberDisciplineService memberDisciplineService;
 
     @PostMapping
-    public MemberDiscipline assignDisciplineToMember(@RequestBody MemberDiscipline association) {
-        return service.assignDiscipline(association);
+    public ResponseEntity<MemberDiscipline> assignDisciplineToMember(@RequestBody MemberDiscipline association) {
+        MemberDiscipline savedAssociation = memberDisciplineService.assignDiscipline(association);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedAssociation);
     }
 
     @GetMapping
-    public List<MemberDiscipline> getAll() {
-        return service.getAll();
+    public ResponseEntity<List<MemberDiscipline>> getAll() {
+        List<MemberDiscipline> associations = memberDisciplineService.getAll();
+        return ResponseEntity.ok(associations);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-        service.delete(id);
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        memberDisciplineService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }
-

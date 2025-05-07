@@ -1,3 +1,4 @@
+
 package com.Club.controller;
 
 import com.Club.dto.AuthRequest;
@@ -36,4 +37,3 @@ public class AuthController {
         return ResponseEntity.ok(new AuthResponse(token));
     }
 }
-
