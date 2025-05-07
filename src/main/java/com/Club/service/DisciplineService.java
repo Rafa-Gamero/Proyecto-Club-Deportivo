@@ -41,4 +41,23 @@ public class DisciplineService {
     public void deleteDiscipline(Long id) {
         disciplineRepository.deleteById(id);
     }
+
+    public List<Discipline> getAll() {
+        return null;
+    }
+
+    public Discipline getById(Long id) {
+        return null;
+    }
+
+    public Discipline create(Discipline discipline) {
+        return null;
+    }
+
+    public Discipline update(Long id, Discipline updatedDiscipline) {
+        return null;
+    }
+
+    public void delete(Long id) {
+    }
 }

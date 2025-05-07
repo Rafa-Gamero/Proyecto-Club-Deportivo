@@ -20,8 +20,9 @@ public class TrainerService {
         return trainerRepository.findAll();
     }
 
-    public Optional<Trainer> getTrainerById(Long id) {
-        return trainerRepository.findById(id);
+    public Trainer getTrainerById(Long id) {
+        return trainerRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Trainer not found"));
     }
 
     public Trainer saveTrainer(Trainer trainer) {

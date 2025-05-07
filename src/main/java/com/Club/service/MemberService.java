@@ -5,7 +5,6 @@ import com.Club.repository.MemberRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class MemberService {
@@ -20,8 +19,9 @@ public class MemberService {
         return memberRepository.findAll();
     }
 
-    public Optional<Member> getMemberById(Long id) {
-        return memberRepository.findById(id);
+    public Member getMemberById(Long id) {
+        return memberRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Member not found"));
     }
 
     public Member saveMember(Member member) {
