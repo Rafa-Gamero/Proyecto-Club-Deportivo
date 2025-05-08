@@ -3,16 +3,13 @@ package com.Club.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.util.List;
 
+@Entity
 @Getter
 @Setter
-
-@AllArgsConstructor
-@Entity
+@RequiredArgsConstructor
 public class Trainer {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,16 +17,6 @@ public class Trainer {
     private String name;
     private String specialty;
 
-    public Trainer() {
-    }
-
-    public Trainer(String name, String specialty) {
-        this.name = name;
-        this.specialty = specialty;
-    }
-
-
     @OneToMany(mappedBy = "trainer")
-    private List<Discipline> disciplines;
-
+    private List<Member> members;
 }

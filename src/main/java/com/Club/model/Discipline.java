@@ -1,18 +1,16 @@
 package com.Club.model;
 
+
+
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 @Getter
 @Setter
-
-
-@Entity
+@RequiredArgsConstructor
 public class Discipline {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,25 +18,6 @@ public class Discipline {
     private String name;
     private String schedule;
 
-    public Discipline() {
-    }
-
-    public Discipline(String name, String schedule) {
-        this.name = name;
-        this.schedule = schedule;
-    }
-    @ManyToOne
-    @JoinColumn(name = "trainer_id")
-    private Trainer trainer;
-
-    @ManyToMany
-    @JoinTable(
-            name = "member_discipline",
-            joinColumns = @JoinColumn(name = "discipline_id"),
-            inverseJoinColumns = @JoinColumn(name = "member_id")
-    )
-    private List<Member> members;
-    @OneToMany(mappedBy = "discipline", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<MemberDiscipline> memberDisciplines = new ArrayList<>();
-
+    @OneToMany(mappedBy = "discipline")
+    private List<MemberDiscipline> memberDisciplines;
 }
