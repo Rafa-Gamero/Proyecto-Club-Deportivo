@@ -1,28 +1,34 @@
 package com.Club.service;
 
+
+
 import com.Club.model.MemberDiscipline;
 import com.Club.repository.MemberDisciplineRepository;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 public class MemberDisciplineService {
 
-    private final MemberDisciplineRepository memberDisciplineRepository;
+    @Autowired
+    private MemberDisciplineRepository memberDisciplineRepository;
 
-    public MemberDiscipline assignDiscipline(MemberDiscipline association) {
-        return memberDisciplineRepository.save(association);
-    }
-
-    public List<MemberDiscipline> getAll() {
+    public List<MemberDiscipline> getAllEnrollments() {
         return memberDisciplineRepository.findAll();
     }
 
-    public void delete(Long id) {
+    public Optional<MemberDiscipline> getEnrollmentById(Long id) {
+        return memberDisciplineRepository.findById(id);
+    }
+
+    public MemberDiscipline saveEnrollment(MemberDiscipline enrollment) {
+        return memberDisciplineRepository.save(enrollment);
+    }
+
+    public void deleteEnrollmentById(Long id) {
         memberDisciplineRepository.deleteById(id);
     }
 }
-

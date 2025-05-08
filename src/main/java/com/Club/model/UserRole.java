@@ -1,4 +1,6 @@
-package com.Club.role;
+package com.Club.model;
+
+
 
 public enum UserRole {
     ROLE_USER,

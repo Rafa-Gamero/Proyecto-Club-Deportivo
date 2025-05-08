@@ -2,31 +2,37 @@ package com.Club.service;
 
 
 
-import com.Club.model.AppUser;
+import com.Club.model.User;
 import com.Club.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
-public class UserService implements UserDetailsService {
+public class UserService {
 
     @Autowired
     private UserRepository userRepository;
 
-    @Override
-    public UserDetails loadUserByUsername(String username) {
-        // Buscamos el usuario por su nombre de usuario
-        AppUser appUser = userRepository.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
 
-        // Retornamos un UserDetails con la información del usuario (nombre y roles)
-        return User.builder()
-                .username(appUser.getUsername())
-                .password(appUser.getPassword())
-                .roles(appUser.getRoles().toArray(new String[0])) // Asumimos que AppUser tiene un campo roles
-                .build();
+    public Optional<User> getUserById(Long id) {
+        return userRepository.findById(id);
+    }
+
+    public User saveUser(User user) {
+        return userRepository.save(user);
+    }
+
+    public void deleteUserById(Long id) {
+        userRepository.deleteById(id);
+    }
+
+    public Optional<User> getUserByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 }

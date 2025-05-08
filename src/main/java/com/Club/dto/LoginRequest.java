@@ -1,9 +1,13 @@
 package com.Club.dto;
 
-import lombok.Data;
+
+
+import lombok.*;
 
 @Data
-public class AuthRequest {
+@NoArgsConstructor
+@AllArgsConstructor
+public class LoginRequest {
     private String username;
     private String password;
 }
