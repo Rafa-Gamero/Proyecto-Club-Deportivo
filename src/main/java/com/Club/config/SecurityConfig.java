@@ -1,11 +1,10 @@
 package com.Club.config;
 
-
-
 import com.Club.config.jwt.JwtFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -34,16 +33,18 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtFilter jwtFilter) throws Exception {
         http
-                .csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/api/trainers/**").hasAnyRole("ADMIN", "TRAINER")
+                        .requestMatchers("/api/members/**", "/api/adult-members/**", "/api/child-members/**").hasRole("ADMIN")
+                        .requestMatchers("/api/disciplines/**", "/api/enrollments/**").authenticated()
+                )
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-                .authorizeHttpRequests()
-                .requestMatchers("/api/auth/**").permitAll()
-                .requestMatchers("/api/trainers/**").hasAnyRole("ADMIN", "TRAINER")
-                .requestMatchers("/api/members/**", "/api/adult-members/**", "/api/child-members/**").hasRole("ADMIN")
-                .requestMatchers("/api/disciplines/**", "/api/enrollments/**").authenticated()
-                .anyRequest().authenticated();
+                .csrf(csrf -> csrf.disable())
+                .httpBasic(Customizer.withDefaults());
 
         return http.build();
     }

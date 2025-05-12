@@ -30,5 +30,5 @@ public class User {
     @NonNull
     private UserRole role;
 
-    // Relaciones si las hay
+
 }

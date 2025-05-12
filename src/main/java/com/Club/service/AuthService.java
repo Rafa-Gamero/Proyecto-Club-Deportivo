@@ -15,7 +15,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
+
 public class AuthService {
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
     @Autowired
     private UserRepository userRepository;
@@ -24,20 +28,7 @@ public class AuthService {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
     private JwtService jwtService;
-
-    public String register(RegisterRequest request) {
-        User user = new User();
-        user.setUsername(request.getUsername());
-        user.setPassword(passwordEncoder.encode(request.getPassword()));
-        user.setRole(request.getRole());
-
-        userRepository.save(user);
-        return "Usuario registrado";
-    }
 
     public String login(LoginRequest request) {
         authenticationManager.authenticate(
@@ -48,5 +39,15 @@ public class AuthService {
                 .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado"));
 
         return jwtService.generateToken(user);
+    }
+
+    public String register(RegisterRequest request) {
+        User user = new User();
+        user.setUsername(request.getUsername());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setRole(request.getRole());
+
+        userRepository.save(user);
+        return "Usuario registrado";
     }
 }
