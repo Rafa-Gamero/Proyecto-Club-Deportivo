@@ -1,7 +1,7 @@
 
 # 🏋️‍♂️ Club Deportivo Backend
 
-Bienvenido al backend del sistema de gestión **Club Sportivo**, desarrollado con **Java + Spring Boot**, siguiendo buenas prácticas REST, seguridad con JWT, y almacenamiento en base de datos **MySQL**. Este proyecto permite gestionar miembros, disciplinas, entrenadores y asignaciones dentro de un club deportivo.
+Bienvenido al backend del sistema de gestión **Club Deportivo**, desarrollado con **Java + Spring Boot**, siguiendo buenas prácticas REST, seguridad con JWT, y almacenamiento en base de datos **MySQL**. Este proyecto permite gestionar miembros, disciplinas, entrenadores y asignaciones dentro de un club deportivo.
 
 ## 📌 Características principales
 
