@@ -67,9 +67,6 @@ Este proyecto ha sido desarrollado usando las siguientes tecnologías y dependen
 - **WebFlux y Reactor** (dependencias incluidas para pruebas)
 - **Maven** como sistema de construcción
 
-## 🔐 Seguridad
-
-El proyecto implementa autenticación y autorización utilizando **JWT** para proteger los endpoints de la API.
 
 ## 📂 Base de datos
 
