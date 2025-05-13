@@ -90,7 +90,7 @@ Desarrollado por **Rafael Gamero Arrabal**
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-blue?logo=linkedin)](https://www.linkedin.com/in/rafael-gamero-arrabal-619200186/)
 
 ---
-## 🙏 Gracias
+
 Este proyecto ha sido desarrollado siguiendo prácticas profesionales de desarrollo backend. ¡Gracias por visitar este repositorio!
 
 
