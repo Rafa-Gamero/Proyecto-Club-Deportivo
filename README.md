@@ -77,6 +77,10 @@ La base de datos utilizada es MySQL. La configuración se encuentra en `applicat
 👉 Puedes ver la presentación completa del proyecto aquí:  
 [🔗 Presentación Canva](https://www.canva.com/design/DAGnUIDaGv0/fo_mFe3JRsw4RMsfrwh7dw/edit?utm_content=DAGnUIDaGv0&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
+## 📌 Gestión del Proyecto
+
+🗂️ Puedes consultar la planificación y seguimiento de tareas en el tablero de Trello:  
+[🔗 Trello - Proyecto 1](https://trello.com/b/pdc09ooc/proyecto-1)
 
 
 ## 👨‍💻 Autor
