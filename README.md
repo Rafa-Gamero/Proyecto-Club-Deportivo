@@ -72,9 +72,17 @@ Este proyecto ha sido desarrollado usando las siguientes tecnologías y dependen
 
 La base de datos utilizada es MySQL. La configuración se encuentra en `application.properties`. El proyecto usa `ddl-auto=update` para facilitar el desarrollo.
 
-## 👨‍💻 Autor
+## 📽️ Presentación del Proyecto
 
-**Rafael Gamero Arrabal**  
+👉 Puedes ver la presentación completa del proyecto aquí:  
+[🔗 Presentación Canva](https://www.canva.com/design/DAGnUIDaGv0/fo_mFe3JRsw4RMsfrwh7dw/edit?utm_content=DAGnUIDaGv0&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+
+## 🙏 Gracias
+
+## 👨‍💻 Autor
+**Club Deportivo - API REST**  
+Desarrollado por **Rafael Gamero Arrabal**  
+¡Gracias por tu atención! 🙌
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-blue?logo=linkedin)](https://www.linkedin.com/in/rafael-gamero-arrabal-619200186/)
 
 ---
