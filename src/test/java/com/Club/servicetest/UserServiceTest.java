@@ -1,16 +1,16 @@
-package com.Club.controllertest;
+package com.Club.servicetest;
 
 
-import com.Club.controllers.UserController;
+
 import com.Club.model.User;
 import com.Club.model.UserRole;
+import com.Club.repository.UserRepository;
 import com.Club.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.ResponseEntity;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,13 +21,13 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class UserControllerTest {
+class UserServiceTest {
 
     @Mock
-    private UserService userService;
+    private UserRepository userRepository;
 
     @InjectMocks
-    private UserController userController;
+    private UserService userService;
 
     @Test
     void testCreateUser() {
@@ -40,19 +40,19 @@ class UserControllerTest {
         User savedUser = new User();
         savedUser.setId(1L);
         savedUser.setUsername("test");
-        savedUser.setPassword("encodedPassword");
+        savedUser.setPassword("password");
         savedUser.setRole(UserRole.ROLE_ADMIN);
 
-        when(userService.saveUser(any(User.class))).thenReturn(savedUser);
+        when(userRepository.save(any(User.class))).thenReturn(savedUser);
 
         // Ejecutar
-        User result = userController.createUser(newUser);
+        User result = userService.saveUser(newUser);
 
         // Verificar
         assertNotNull(result);
         assertEquals(1L, result.getId());
         assertEquals("test", result.getUsername());
-        verify(userService, times(1)).saveUser(any(User.class));
+        verify(userRepository, times(1)).save(any(User.class));
     }
 
     @Test
@@ -68,10 +68,10 @@ class UserControllerTest {
 
         List<User> userList = Arrays.asList(user1, user2);
 
-        when(userService.getAllUsers()).thenReturn(userList);
+        when(userRepository.findAll()).thenReturn(userList);
 
         // Ejecutar
-        List<User> result = userController.getAllUsers();
+        List<User> result = userService.getAllUsers();
 
         // Verificar
         assertEquals(2, result.size());
@@ -86,26 +86,26 @@ class UserControllerTest {
         user.setId(1L);
         user.setUsername("test");
 
-        when(userService.getUserById(1L)).thenReturn(Optional.of(user));
+        when(userRepository.findById(1L)).thenReturn(Optional.of(user));
 
         // Ejecutar
-        ResponseEntity<User> response = userController.getUserById(1L);
+        Optional<User> result = userService.getUserById(1L);
 
         // Verificar
-        assertTrue(response.getStatusCode().is2xxSuccessful());
-        assertEquals("test", response.getBody().getUsername());
+        assertTrue(result.isPresent());
+        assertEquals("test", result.get().getUsername());
     }
 
     @Test
-    void testGetUserById_NotFound() {
+    void testDeleteUser() {
         // Preparar
-        when(userService.getUserById(999L)).thenReturn(Optional.empty());
+        Long userId = 1L;
+        doNothing().when(userRepository).deleteById(userId);
 
         // Ejecutar
-        ResponseEntity<User> response = userController.getUserById(999L);
+        userService.deleteUserById(userId);
 
         // Verificar
-        assertTrue(response.getStatusCode().is4xxClientError());
-        assertNull(response.getBody());
+        verify(userRepository, times(1)).deleteById(userId);
     }
 }
