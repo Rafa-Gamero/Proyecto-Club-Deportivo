@@ -35,11 +35,10 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll()
-                        .anyRequest().authenticated()
                         .requestMatchers("/api/trainers/**").hasAnyRole("ADMIN", "TRAINER")
                         .requestMatchers("/api/members/**", "/api/adult-members/**", "/api/child-members/**").hasRole("ADMIN")
                         .requestMatchers("/api/disciplines/**", "/api/enrollments/**").authenticated()
-
+                        .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
