@@ -27,7 +27,8 @@ public class JwtService {
     public String generateToken(User user) {
         return Jwts.builder()
                 .setSubject(user.getUsername())
-                .claim("role", user.getRole().name())
+                .claim("role", user.getRole().name())  // Asegúrate de que sea mayúsculas
+                .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + expiration))
                 .signWith(SignatureAlgorithm.HS256, getSigningKey())
                 .compact();
@@ -48,6 +49,8 @@ public class JwtService {
                     .parseClaimsJws(token);
             return true;
         } catch (JwtException | IllegalArgumentException e) {
+            System.out.println("Error validando token: " + e.getMessage());
+            e.printStackTrace();
             return false;
         }
     }
@@ -62,7 +65,6 @@ public class JwtService {
 
     // Convierte la clave secreta desde Base64 a SecretKey
     private SecretKey getSigningKey() {
-        byte[] keyBytes = Base64.getEncoder().encode(secretKey.getBytes());
-        return new SecretKeySpec(keyBytes, SignatureAlgorithm.HS256.getJcaName());
+        return new SecretKeySpec(secretKey.getBytes(), SignatureAlgorithm.HS256.getJcaName());
     }
 }
