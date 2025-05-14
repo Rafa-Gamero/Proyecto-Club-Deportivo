@@ -72,6 +72,14 @@ Este proyecto ha sido desarrollado usando las siguientes tecnologías y dependen
 
 La base de datos utilizada es MySQL. La configuración se encuentra en `application.properties`. El proyecto usa `ddl-auto=update` para facilitar el desarrollo.
 
+## 🛠️ Mejoras Futuras
+
+- 📄 Documentación interactiva con Swagger.  
+- 🔍 Paginación y filtros en los listados.  
+- 🔐 Roles más específicos para control de acceso.  
+- 🐳 Dockerización para despliegue fácil.  
+- 💻 Interfaz frontend para consumir la API.
+
 ## 📽️ Presentación del Proyecto
 
 👉 Puedes ver la presentación completa del proyecto aquí:  
